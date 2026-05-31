@@ -1,0 +1,55 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2868
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 # Plantejakten \'97 Web App Specification\
+\
+A real-time, shared shopping checklist for two phones, built for a high-pressure, ~30 minute plant-market run where two people hunt the same list and must stay coordinated without colliding on the same plant.\
+\
+This document is written to be handed to Claude Code and executed. The architecture is locked (see section 16): one Bun (or Node) process on Hugin, the DGX Spark, serves the built frontend, the REST endpoints, and the WebSocket from a single origin, published through a Cloudflare tunnel at `botanisk.btrbot.com`. One origin, one process, one deploy. The document defines the wire protocol precisely and includes the seed catalog so the build is self-contained.\
+\
+Spec language: English. App UI language: Norwegian (Bokm\'e5l). All user-facing strings are Norwegian; see the strings table in the Design section.\
+\
+-----\
+\
+## 1. Goals\
+\
+1. Two (and up to four) people open the same list on their own phones and see each other\'92s actions within a second, without accounts or sign-up.\
+1. The most contested items are pinned to the top so the team grabs them first.\
+1. Tapping +1 when a plant is in hand is the single most important action: large target, eyes-up, one thumb, works while walking.\
+1. The team never double-chases: a person can mark an item as \'93on the way\'94, and the other sees it instantly with that person\'92s colour.\
+1. Installs to the home screen, opens full-screen like an app, loads instantly even on weak venue signal, keeps the screen awake while shopping.\
+1. Survives a backgrounded phone, a dropped connection, and a flaky cellular network without losing state.\
+\
+## 2. Non-goals\
+\
+1. No payment, inventory, or stock integration. The market is cash-and-carry; this tool only tracks intent versus secured.\
+1. No public directory of lists, no social features, no comments.\
+1. No native iOS/Android builds. A PWA covers the home-screen and full-screen needs.\
+1. No multi-tenant accounts or login. A room code in the URL is the shared secret.\
+1. No third-party analytics or trackers.\
+\
+## 3. Primary scenario\
+\
+Saturday, plant market, two people. One taps \'93Ny handletur\'94 on the phone, gets a room with a short code, shows a QR. The partner scans it and is in the same room in seconds. Both see the same list, high-priority plants first. They split up. Person A walks toward the Cleome table and taps \'93Jeg tar denne\'94 on Edderkoppblomst; Person B\'92s screen shows it claimed in A\'92s colour, so B heads elsewhere. As each plant lands in a basket, +1. Counters climb on both phones. When an item hits its target it turns green and drops out of the default \'93Gjenst\'e5r\'94 view, shrinking the hunt to what remains. Total time in the market: under half an hour. The tool must never be the slow part.\
+\
+## 4. Architecture\
+\
+One process on Hugin (the Spark) serves everything from a single origin, published through a Cloudflare named tunnel. The phones load the app and open the WebSocket against the same hostname. There is no second origin, so there is no CORS, no cross-origin CSP juggling, and no separate API host.\
+\
+```\
+  Phone A \uc0\u9472 \u9472 \u9488 \
+  Phone B \uc0\u9472 \u9472 \u9508    HTTPS (app) + WSS (sync), same origin\
+  Phone C \uc0\u9472 \u9472 \u9496 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9654   Cloudflare tunnel\
+                                         botanisk.btrbot.com\
+                                                \uc0\u9474  cloudflared ingress\
+                                                \uc0\u9660 \
+                                         Hugin (the Spark), localhost:8787\
+                                         \uc0\u9484 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9488 \
+                                         \uc0\u9474  Bun/Node server                \u9474 \
+                                         \uc0\u9474   \'95 static app (built dist/)    \u9474 \
+                                         \uc0\u9474   \'95 /api/*     -> REST           \u9474 \
+                                         \uc0\u9474   \'95 /ws/:code ... Read more}
