@@ -26,6 +26,7 @@ const MIME = {
 const SEED_ITEMS = [
   ["edderkoppblomst", "Edderkoppblomst", "Cleome hassleriana 'Cherry Queen'", "Sommerblomst", 5, 6],
   ["gresk-levkoy", "Gresk levkøy", "Matthiola longipetala ssp. bicornis", "Sommerblomst", 5, 8],
+  ["duftnattlys", "Duftnattlys", "Oenothera pallida 'Innocence'", "Middel høy", 4, 1],
   ["mexicohatt", "Mexicohatt / Præriekjegleblomst", "Ratiba columnifera f. pulcherrima", "Medium", 3, 1]
 ].map(([id, name, latin, category, priority, target], index) => ({
   id,
