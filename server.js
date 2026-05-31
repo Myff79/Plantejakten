@@ -24,17 +24,8 @@ const MIME = {
 };
 
 const SEED_ITEMS = [
-  ["edderkoppblomst", "Edderkoppblomst", "Cleome hassleriana", "Sommerblomst", 5, 2],
-  ["verbena-bonariensis", "Kjempeverbena", "Verbena bonariensis", "Sommerblomst", 5, 3],
-  ["praktsalvie", "Praktsalvie", "Salvia splendens", "Sommerblomst", 4, 2],
-  ["sjokoladekosmos", "Sjokoladekosmos", "Cosmos atrosanguineus", "Staude", 5, 1],
-  ["georgine", "Georgine", "Dahlia", "Knoll", 4, 2],
-  ["blodbeger", "Blodbeger", "Rhodochiton atrosanguineus", "Klatreplante", 5, 1],
-  ["pelargonia-duft", "Duftpelargonia", "Pelargonium graveolens", "Potter", 4, 1],
-  ["stjerneskjerm", "Stjerneskjerm", "Astrantia major", "Staude", 4, 2],
-  ["klematis", "Klematis", "Clematis", "Klatreplante", 4, 1],
-  ["sitronverbena", "Sitronverbena", "Aloysia citrodora", "Urter", 4, 1],
-  ["magnolia", "Magnolia", "Magnolia", "Tre", 4, 1]
+  ["edderkoppblomst", "Edderkoppblomst", "Cleome hassleriana 'Cherry Queen'", "Sommerblomst", 5, 6],
+  ["gresk-levkoy", "Gresk levkøy", "Matthiola longipetala ssp. bicornis", "Sommerblomst", 5, 8]
 ].map(([id, name, latin, category, priority, target], index) => ({
   id,
   name,
