@@ -217,6 +217,8 @@ function render() {
   }
 
   const items = visibleItems();
+  const mainItems = items.filter((item) => item.category !== "Mamma");
+  const momItems = items.filter((item) => item.category === "Mamma");
   const totalTarget = state.room.items.reduce((sum, item) => sum + item.target, 0);
   const totalCount = state.room.items.reduce((sum, item) => sum + Math.min(item.count, item.target), 0);
   const doneItems = state.room.items.filter((item) => item.count >= item.target).length;
@@ -282,7 +284,15 @@ function render() {
         </nav>
 
         <section class="list">
-          ${items.length ? items.map(itemTemplate).join("") : `<div class="empty">Ingen planter her akkurat nå.</div>`}
+          ${mainItems.length ? mainItems.map(itemTemplate).join("") : ""}
+          ${momItems.length ? `
+            <div class="section-heading">
+              <span>Mammas ønsker</span>
+              <small>${momItems.reduce((sum, item) => sum + item.count, 0)}/${momItems.reduce((sum, item) => sum + item.target, 0)}</small>
+            </div>
+            ${momItems.map(itemTemplate).join("")}
+          ` : ""}
+          ${items.length ? "" : `<div class="empty">Ingen planter her akkurat nå.</div>`}
         </section>
       </section>
     </main>

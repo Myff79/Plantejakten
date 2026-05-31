@@ -334,6 +334,26 @@ h1 {
   padding-bottom: 16px;
 }
 
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+  padding: 10px 4px 2px;
+  color: var(--muted);
+  font-weight: 950;
+}
+
+.section-heading span {
+  color: var(--ink);
+  font-size: 18px;
+}
+
+.section-heading small {
+  font-size: 14px;
+}
+
 .item {
   display: grid;
   gap: 10px;

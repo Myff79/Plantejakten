@@ -39,7 +39,10 @@ const SEED_ITEMS = [
   ["trompetblomst", "Trompetblomst", "Salpiglossis sinuata 'Kew Blue'", "Middels", 3, 3],
   ["zinnia-zinderella-red", "Zinnia 'Zinderella Red'", "Zinnia elegans 'Zinderella Red'", "Middels", 3, 4],
   ["zinnia-zahara-starlight-rose", "Zinnia 'Zahara Starlight Rose'", "Zinnia marylandica 'Zahara Starlight Rose'", "Middels", 3, 4],
-  ["zinnia-zinderella-lilac", "Zinnia 'Zinderella Lilac'", "Zinnia marylandica 'Zinderella Lilac'", "Middels", 3, 4]
+  ["zinnia-zinderella-lilac", "Zinnia 'Zinderella Lilac'", "Zinnia marylandica 'Zinderella Lilac'", "Middels", 3, 4],
+  ["mamma-kjempeverbena", "Kjempeverbena", "Verbena bonariensis 'Vanity'", "Mamma", 1, 1],
+  ["mamma-sommerlevkoy", "Sommerlevkøy", "Matthiola incana var. annua 'Hot Cakes Purple'", "Mamma", 1, 2],
+  ["mamma-lovemunn-torbay-rock", "Løvemunn 'Torbay Rock'", "Antirrhinum majus 'Torbay Rock'", "Mamma", 1, 2]
 ].map(([id, name, latin, category, priority, target], index) => ({
   id,
   name,
