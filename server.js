@@ -24,13 +24,22 @@ const MIME = {
 };
 
 const SEED_ITEMS = [
-  ["edderkoppblomst", "Edderkoppblomst", "Cleome hassleriana 'Cherry Queen'", "Sommerblomst", 5, 6],
   ["gresk-levkoy", "Gresk levkøy", "Matthiola longipetala ssp. bicornis", "Sommerblomst", 5, 8],
-  ["skogtobakk", "Skogtobakk", "Nicotiana sylvestris 'Only the Lonely'", "Høy", 5, 3],
-  ["duftnattlys", "Duftnattlys", "Oenothera pallida 'Innocence'", "Middel høy", 4, 1],
-  ["duftklinte", "Duftklinte", "Amberboa moschata 'The Bride'", "Medium", 3, 1],
-  ["mexicohatt", "Mexicohatt / Præriekjegleblomst", "Ratiba columnifera f. pulcherrima", "Medium", 3, 1],
-  ["zinnia-zinderella-red", "Zinnia 'Zinderella Red'", "Zinnia elegans 'Zinderella Red'", "Medium", 3, 1]
+  ["edderkoppblomst", "Edderkoppblomst", "Cleome hassleriana 'Cherry Queen'", "Sommerblomst", 5, 6],
+  ["duftnattlys", "Duftnattlys", "Oenothera pallida 'Innocence'", "Sommerblomst", 5, 4],
+  ["skogtobakk", "Skogtobakk", "Nicotiana sylvestris 'Only the Lonely'", "Sommerblomst", 5, 4],
+  ["amaranthus-revehale", "Amaranthus Revehale", "Amaranthus caudatus 'Red Tails'", "Middels", 3, 2],
+  ["asters-sommerasters", "Asters Sommerasters", "Callistephus chinensis", "Middels", 3, 3],
+  ["atlasblomst", "Atlasblomst", "Clarkia amoena 'Orange Glory'", "Middels", 3, 3],
+  ["duftklinte", "Duftklinte", "Amberboa moschata 'The Bride'", "Middels", 3, 2],
+  ["mexicohatt", "Mexicohatt Præriekjegleblomst", "Ratiba columnifera f. pulcherrima", "Middels", 3, 3],
+  ["pafuglblomst-big-kiss-white-flame", "Påfuglblomst 'Big Kiss white flame'", "Gazania hybrida 'Big Kiss white flame'", "Middels", 3, 3],
+  ["praktsalvie", "Praktsalvie", "Salvia splendens 'Lighthouse Purple'", "Middels", 3, 3],
+  ["spansk-flagg", "Spansk Flagg", "Ipomoea lobata 'Exotic love'", "Middels", 3, 2],
+  ["trompetblomst", "Trompetblomst", "Salpiglossis sinuata 'Kew Blue'", "Middels", 3, 3],
+  ["zinnia-zinderella-red", "Zinnia 'Zinderella Red'", "Zinnia elegans 'Zinderella Red'", "Middels", 3, 4],
+  ["zinnia-zahara-starlight-rose", "Zinnia 'Zahara Starlight Rose'", "Zinnia marylandica 'Zahara Starlight Rose'", "Middels", 3, 4],
+  ["zinnia-zinderella-lilac", "Zinnia 'Zinderella Lilac'", "Zinnia marylandica 'Zinderella Lilac'", "Middels", 3, 4]
 ].map(([id, name, latin, category, priority, target], index) => ({
   id,
   name,
