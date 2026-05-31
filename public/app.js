@@ -10,6 +10,7 @@ const state = {
   connected: false,
   ws: null,
   reconnectTimer: null,
+  heartbeatTimer: null,
   pending: loadJson("plantejakten-pending", []),
   wakeLock: null,
   identity: loadJson("plantejakten-identity", null) || makeIdentity()
@@ -112,6 +113,7 @@ function connectWs() {
   ws.addEventListener("open", () => {
     state.connected = true;
     ws.send(JSON.stringify({ type: "hello", client: { ...state.identity, online: true } }));
+    startHeartbeat();
     flushPending();
     render();
   });
@@ -124,6 +126,7 @@ function connectWs() {
   });
   ws.addEventListener("close", () => {
     state.connected = false;
+    stopHeartbeat();
     render();
     state.reconnectTimer = setTimeout(connectWs, 900);
   });
@@ -131,6 +134,20 @@ function connectWs() {
     state.connected = false;
     ws.close();
   });
+}
+
+function startHeartbeat() {
+  stopHeartbeat();
+  state.heartbeatTimer = setInterval(() => {
+    if (state.ws?.readyState === WebSocket.OPEN) {
+      state.ws.send(JSON.stringify({ type: "ping", at: Date.now() }));
+    }
+  }, 25000);
+}
+
+function stopHeartbeat() {
+  clearInterval(state.heartbeatTimer);
+  state.heartbeatTimer = null;
 }
 
 function sendAction(action) {

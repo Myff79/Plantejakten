@@ -21,6 +21,16 @@ Anbefalt rask vei:
 3. Bruk `npm install` som build command og `npm start` som start command.
 4. Åpne Render-URL-en på begge mobiler.
 
+Direkte Render-lenke:
+
+https://render.com/deploy?repo=https://github.com/Myff79/Plantejakten
+
+Hvis begge mobilene er på samme Wi-Fi eller samme hotspot, kan dere også bruke lokal server:
+
+1. Kjør `npm start` på Macen.
+2. Åpne LAN-adressen som terminalen skriver ut, for eksempel `http://172.x.x.x:8787`, på begge mobiler.
+3. Lena velger `Lena`, Thordur velger `Thordur`.
+
 ## Funksjoner
 
 - Romkode i URL uten innlogging.
